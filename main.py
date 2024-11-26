@@ -3,6 +3,7 @@ import flet as ft
 from assets.objects import objects_main
 from assets.objects import objects_contacts
 from assets.objects import objects_rules
+from assets.objects import objects_about_us
 
 from assets.actions import actions_main
 
@@ -73,9 +74,6 @@ def main(page: ft.Page):
         objects_main.home.on_click = main_page
         objects_main.rules.on_click = rules
         
-        objects_main.lgn_redirect.on_click = redirect_to_reg
-        objects_main.reg_redirect.on_click = redirect_to_lgn
-        
         categories_container = ft.Container(
             content = objects_main.categories_column,
             width = 300,
@@ -128,7 +126,7 @@ def main(page: ft.Page):
         
         page.add(objects_rules.final)
         page.update()
-    
+        
     main_page()
 
 if __name__ == "__main__":
