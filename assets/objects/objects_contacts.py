@@ -198,5 +198,5 @@ contacts = ft.Container(
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
     ),
     padding=ft.padding.only(top = 20, left = 20, right = 20),
-    margin = ft.margin.only(top = 45)
+    margin = ft.margin.only(top = 20)
 )
