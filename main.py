@@ -108,6 +108,7 @@ def main(page: ft.Page):
     
     def rules(*args):
         page.clean()
+        page.scroll = ft.ScrollMode.AUTO
         page.padding = None
         page.title = "Правила"
         
