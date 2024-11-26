@@ -6,7 +6,7 @@ update_button = ft.IconButton(icon = ft.icons.REFRESH, icon_color = "#850000")
 
 home = ft.TextButton("Главная", scale = 1.3)
 about = ft.TextButton("О нас", scale = 1.3)
-posts = ft.TextButton("Посты", scale = 1.3)
+posts = ft.TextButton("Написать пост", scale = 1.3, style = ft.ButtonStyle(bgcolor = "#850000"))
 rules = ft.TextButton("Правила", scale = 1.3)
 contacts = ft.TextButton("Контакты", scale = 1.3)
 help_ = ft.TextButton("Помощь", scale = 1.3)
@@ -127,6 +127,8 @@ reg_popup = ft.AlertDialog(
     bgcolor = "#151515"
 )
 
+
+
 appbar_unlogged = ft.AppBar(
         actions=[
             ft.Container(ft.Row(
@@ -160,8 +162,14 @@ appbar_unlogged = ft.AppBar(
     shape = ft.OutlinedBorder,
     )
 
+send_post = ft.TextButton("Отправить", icon = ft.icons.SEND)
+cancel_post = ft.TextButton("Отмена")
+post_header_field = ft.TextField(width = 600, hint_text = "Заголовок поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
+post_text_field = ft.TextField(width = 600, height = 400, hint_text = "Текст поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
 
-
+post_writer = ft.Container(
+    
+)
 
 main_column = ft.Column([
     ft.Image(src = "assets/banner.png"),

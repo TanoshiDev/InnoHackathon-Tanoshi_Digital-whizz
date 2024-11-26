@@ -128,7 +128,7 @@ def main(page: ft.Page):
         
         page.add(objects_rules.final)
         page.update()
-        
+    
     main_page()
 
 if __name__ == "__main__":
