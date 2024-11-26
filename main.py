@@ -2,6 +2,7 @@ import flet as ft
 
 from assets.objects import objects_main
 from assets.objects import objects_contacts
+from assets.objects import objects_rules
 
 from assets.actions import actions_main
 
@@ -15,8 +16,6 @@ page_theme = ft.Theme(
 def main(page: ft.Page):
     def main_page(*args):
         page.clean()
-        page.window.width = 1920
-        page.window.height = 1080
         page.title = "Whizz"
         page.window.maximized = True
         page.bgcolor = "#1C1C1C"
@@ -62,6 +61,7 @@ def main(page: ft.Page):
         #objects_main.close.on_click = close_dialog
         objects_main.contacts.on_click = contacts
         objects_main.home.on_click = main_page
+        objects_main.rules.on_click = rules
         
         categories_container = ft.Container(
             content = objects_main.categories_column,
@@ -106,6 +106,15 @@ def main(page: ft.Page):
         page.add(objects_contacts.contacts)
         page.update()
     
+    def rules(*args):
+        page.clean()
+        page.padding = None
+        page.title = "Правила"
+        
+        page.add(objects_rules.final)
+        page.update()
+        
+
     main_page()
 
 if __name__ == "__main__":

@@ -39,7 +39,7 @@ text_container = ft.Container(
             
             ft.Text(
                 "Прямые контакты",
-                size=16,
+                size = 16,
                 weight = "bold",
                 color = "#FFFFFF",
                 font_family = "WeblySleek UI",
@@ -86,7 +86,7 @@ text_container = ft.Container(
                             ),
                             ft.Text(
                                 "@Zeefren",
-                                size=12,
+                                size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
                             ),
@@ -169,7 +169,7 @@ text_container = ft.Container(
     ),
     padding = ft.padding.all(20),
     alignment = ft.alignment.center,
-    width=700,
+    width = 700,
     height = 300,
     bgcolor="#151515",
     border_radius = 26,
@@ -181,10 +181,10 @@ center_column = ft.Column(
         ft.Container(
             content=center,
             alignment = ft.alignment.center,
-            height=450,
+            height = 450, 
         )
     ],
-    spacing=10,
+    spacing = 10,
     alignment = ft.MainAxisAlignment.CENTER
 )
 
