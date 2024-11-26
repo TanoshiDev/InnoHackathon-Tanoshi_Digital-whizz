@@ -166,6 +166,13 @@ send_post = ft.TextButton("Отправить", icon = ft.icons.SEND)
 cancel_post = ft.TextButton("Отмена")
 post_header_field = ft.TextField(width = 600, hint_text = "Заголовок поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
 post_text_field = ft.TextField(width = 600, height = 400, hint_text = "Текст поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
+pick_theme = ft.ExpansionPanelList(
+    controls = [
+        ft.ExpansionPanel(
+            bgcolor = "#1C1C1C"
+        )
+    ]
+)
 
 post_writer = ft.Container(
     
