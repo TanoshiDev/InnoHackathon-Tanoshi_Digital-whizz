@@ -46,10 +46,7 @@ right_container_image_button = ft.Container(
         src="tg_about_us.png",
         width = 440,
         height = 300,
-        fit = ft.ImageFit.CONTAIN,
     ),
-    # on_click = open_telegram_link,
-    # on_hover = on_hover,
     animate_scale = ft.Animation(duration=150, curve = ft.AnimationCurve.EASE_IN_OUT),
     border_radius = 15,
 )

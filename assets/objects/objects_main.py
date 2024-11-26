@@ -6,18 +6,18 @@ update_button = ft.IconButton(icon = ft.icons.REFRESH, icon_color = "#850000")
 
 home = ft.TextButton("Главная", scale = 1.3)
 about = ft.TextButton("О нас", scale = 1.3)
-posts = ft.TextButton("Написать пост", scale = 1.3, style = ft.ButtonStyle(bgcolor = "#850000"))
+posts = ft.TextButton("Написать пост", scale = 1.3, style = ft.ButtonStyle())
 rules = ft.TextButton("Правила", scale = 1.3)
 contacts = ft.TextButton("Контакты", scale = 1.3)
 help_ = ft.TextButton("Помощь", scale = 1.3)
 profile = ft.IconButton(ft.icons.ACCOUNT_CIRCLE)
-login = ft.TextButton("Войти", scale = 1.3, style = ft.ButtonStyle(bgcolor = "#850000"))
+login = ft.CupertinoButton(content = ft.Text("Войти", size = 20), bgcolor = "#850000", color = "#ffffff", border_radius = 15, height = 50)
 register = ft.TextButton("Регистрация", scale = 1.3)
 
 # Для категорий
-news = ft.TextButton("Новости и события")
+news = ft.TextButton("Новости и события", style = ft.ButtonStyle(elevation = None, shape = None))
 techs = ft.TextButton("Технологии и инновации")
-health = ft.TextButton("Здоровье и фитнесс")
+health = ft.TextButton("Здоровье и фитнес")
 hobbies = ft.TextButton("Хобби и увлечения")
 literature = ft.TextButton("Книги и литература")
 cinema = ft.TextButton("Кино и телевидение")
@@ -133,7 +133,7 @@ appbar_unlogged = ft.AppBar(
         actions=[
             ft.Container(ft.Row(
                             [
-                                ft.Container(ft.Image("assets/logo.png", scale = 0.6), margin = ft.margin.only(right = 75)),
+                                ft.Container(ft.Image("assets/logo.png", scale = 1), margin = ft.margin.only(right = 75)),
                                 home,
                                 about,
                                 posts,
@@ -162,20 +162,51 @@ appbar_unlogged = ft.AppBar(
     shape = ft.OutlinedBorder,
     )
 
-send_post = ft.TextButton("Отправить", icon = ft.icons.SEND)
+send_post = ft.TextButton("Отправить", icon = ft.icons.SEND, style = ft.ButtonStyle(bgcolor = "#850000"))
 cancel_post = ft.TextButton("Отмена")
-post_header_field = ft.TextField(width = 600, hint_text = "Заголовок поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
-post_text_field = ft.TextField(width = 600, height = 400, hint_text = "Текст поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
-pick_theme = ft.ExpansionPanelList(
-    controls = [
-        ft.ExpansionPanel(
-            bgcolor = "#1C1C1C"
-        )
-    ]
+post_header_field = ft.TextField(width = 400, hint_text = "Заголовок поста...", focused_border_color = "#850000", border_color = "#1C1C1C")
+post_text_field = ft.TextField(width = 660, height = 200,hint_text = "Текст поста...", focused_border_color = "#850000", border_color = "#1C1C1C", expand = False, multiline = True, adaptive = False, min_lines = 8)
+
+theme_picker = ft.Dropdown(
+    width = 250,
+    options = [
+        ft.dropdown.Option("Новости и события"),
+        ft.dropdown.Option("Технологии и инновации"),
+        ft.dropdown.Option("Здоровье и фитнес"),
+        ft.dropdown.Option("Хобби и увлечения"),
+        ft.dropdown.Option("Книги и литература"),
+        ft.dropdown.Option("Кино и телевидение"),
+        ft.dropdown.Option("Игры"),
+        ft.dropdown.Option("Образование и карьера"),
+        ft.dropdown.Option("Путешествия и отдых"),
+        ft.dropdown.Option("Сервисы"),
+        ft.dropdown.Option("Социальные вопросы"),
+        ft.dropdown.Option("Другое")
+    ],
+    bgcolor = "#1C1C1C",
 )
 
 post_writer = ft.Container(
-    
+    content = ft.Column([
+        ft.Row([
+            post_header_field,
+            theme_picker
+        ]),
+        post_text_field,
+        ft.Row([
+            send_post,
+            cancel_post
+        ])
+    ]),
+    width = 660,
+    height = 300
+)
+
+post_popup = ft.AlertDialog(
+    content = post_writer,
+    actions = [],
+    open = False,
+    bgcolor = "#151515"
 )
 
 main_column = ft.Column([
@@ -188,20 +219,20 @@ main_column = ft.Column([
     spacing = 115)
 ])
 
-categories_column = ft.Column(
-    [
-        ft.Text("Основные категории", color = "#850000", scale = 1.1),
+categories_column = ft.Container(
+    content = ft.Column([
+        ft.Text("Основные категории\n", color = "#850000", scale = 1.4, width = 200, text_align = ft.TextAlign.CENTER),
         news,
         techs,
         health,
-        hobbies,
+        hobbies, 
         literature,
         cinema,
         games,
-        education,
+        education, 
         trips,
         services,
         social,
-        other
-    ]
-)
+        other,
+    ])  
+)                       

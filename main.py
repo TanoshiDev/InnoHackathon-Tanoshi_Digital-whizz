@@ -53,6 +53,14 @@ def main(page: ft.Page):
         def open_reg(e):
             objects_main.reg_popup.open = True
             page.update()
+            
+        def open_writer(e):
+            objects_main.post_popup.open = True
+            page.update()
+            
+        def close_writer(e):
+            objects_main.post_popup.open = False
+            page.update()
         
         def redirect_to_reg(e):
             objects_main.lgn_popup.open = False
@@ -73,6 +81,12 @@ def main(page: ft.Page):
         objects_main.contacts.on_click = contacts
         objects_main.home.on_click = main_page
         objects_main.rules.on_click = rules
+        objects_main.about.on_click = about_us
+        objects_main.posts.on_click = open_writer
+        
+        objects_main.lgn_redirect.on_click = redirect_to_reg
+        objects_main.reg_redirect.on_click = redirect_to_lgn
+        objects_main.cancel_post.on_click = close_writer
         
         categories_container = ft.Container(
             content = objects_main.categories_column,
@@ -90,7 +104,8 @@ def main(page: ft.Page):
                 ],    
             ),
             margin = ft.margin.only(right = 50),
-            height = 800
+            height = 800,
+            padding = ft.padding.only(top = 5)
         )
         
         final_container = ft.Container(
@@ -107,6 +122,7 @@ def main(page: ft.Page):
         
         page.overlay.append(objects_main.lgn_popup)
         page.overlay.append(objects_main.reg_popup)
+        page.overlay.append(objects_main.post_popup)
         page.add(final_container)
         page.update()
     
@@ -125,6 +141,23 @@ def main(page: ft.Page):
         page.title = "Правила"
         
         page.add(objects_rules.final)
+        page.update()
+        
+    def about_us(*args):
+        page.clean()
+        page.padding = None
+        page.title = "О нас"
+        objects_about_us.right_container_image_button.on_click = actions_main.open_telegram_link
+        
+        def on_hover(event: ft.HoverEvent):
+            if event.data == "true":
+                objects_about_us.right_container_image_button.scale = 1.03
+            else:
+                objects_about_us.right_container_image_button.scale = 1.0
+            page.update
+            
+        objects_about_us.right_container_image_button.on_hover = on_hover
+        page.add(objects_about_us.about_us)
         page.update()
         
     main_page()
