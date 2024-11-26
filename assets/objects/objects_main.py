@@ -12,7 +12,7 @@ contacts = ft.TextButton("Контакты", scale = 1.3)
 help_ = ft.TextButton("Помощь", scale = 1.3)
 profile = ft.IconButton(ft.icons.ACCOUNT_CIRCLE)
 login = ft.TextButton("Войти", scale = 1.3, style = ft.ButtonStyle(bgcolor = "#850000"))
-register = ft.TextButton("Зарегистироваться", scale = 1.3)
+register = ft.TextButton("Регистрация", scale = 1.3)
 
 # Для категорий
 news = ft.TextButton("Новости и события")
@@ -48,9 +48,10 @@ online = ft.Container(
 )
 
 # Панель входа
-login_btn = ft.TextButton("Войти")
+login_btn = ft.TextButton("Войти", width = 400, style = ft.ButtonStyle(bgcolor = "#850000"))
 lgn_login_field = ft.TextField(width = 400, border_radius = 10, bgcolor = "#1C1C1C", hint_text = "Логин...", focused_border_color = "#850000", border_color = "#1C1C1C", height = 50)
 lgn_pass_field = ft.TextField(password = True ,width = 400, border_radius = 10, bgcolor = "#1C1C1C", hint_text = "Пароль...", focused_border_color = "#850000", border_color = "#1C1C1C", height = 50)
+lgn_redirect = ft.TextButton("Зарегистрироваться", style = ft.ButtonStyle(color = "#850000"), scale = 1.1)
 
 lgn_panel = ft.Container(
     content = ft.Column([
@@ -63,9 +64,66 @@ lgn_panel = ft.Container(
         ft.Image("banner.png", width = 400),
         lgn_login_field,
         lgn_pass_field,
-        login_btn,   
+        login_btn,
+        ft.Container(
+            content = ft.Row([
+                ft.Text("Нет аккаунта?", scale = 1.1),
+                lgn_redirect
+            ],
+            width = 400,
+            alignment = ft.MainAxisAlignment.CENTER),
+            margin = ft.margin.only(top = 30),
+            padding = ft.padding.only(top = 30),
+            border = ft.border.only(top = ft.BorderSide(width = 2, color = "#850000"))
+        )   
     ], height = 450),
-    padding = ft.padding.only(top = 50),
+    padding = ft.padding.only(top = 30),
+    bgcolor = "#151515"
+)
+
+lgn_popup = ft.AlertDialog(
+    content = lgn_panel,
+    actions = [],
+    open = False,
+    bgcolor = "#151515"
+)
+
+reg_btn = ft.TextButton("Зарегистрироваться", width = 400, style = ft.ButtonStyle(bgcolor = "#850000"))
+reg_login_field = ft.TextField(width = 400, border_radius = 10, bgcolor = "#1C1C1C", hint_text = "Логин...", focused_border_color = "#850000", border_color = "#1C1C1C", height = 50)
+reg_pass_field = ft.TextField(password = True ,width = 400, border_radius = 10, bgcolor = "#1C1C1C", hint_text = "Пароль...", focused_border_color = "#850000", border_color = "#1C1C1C", height = 50)
+reg_redirect = ft.TextButton("Войти", style = ft.ButtonStyle(color = "#850000"), scale = 1.1)
+reg_panel = ft.Container(
+    content = ft.Column([
+        ft.Container(
+            content=ft.Text("Регистрация", color = "#850000", scale = 1.8, width = 400, text_align = ft.TextAlign.CENTER),
+            padding = ft.padding.only(bottom = 30),
+            border = ft.border.only(bottom = ft.BorderSide(width = 2, color = "#850000")),
+            width = 400,
+        ),
+        ft.Image("banner.png", width = 400),
+        reg_login_field,
+        reg_pass_field,
+        reg_btn,  
+        ft.Container(
+            content = ft.Row([
+                ft.Text("Есть аккаунт?", scale = 1.1),
+                reg_redirect
+            ],
+            width = 400,
+            alignment = ft.MainAxisAlignment.CENTER),
+            margin = ft.margin.only(top = 30),
+            padding = ft.padding.only(top = 30),
+            border = ft.border.only(top = ft.BorderSide(width = 2, color = "#850000"))
+        )    
+    ], height = 450),
+    padding = ft.padding.only(top = 30),
+    bgcolor = "#151515"
+)
+
+reg_popup = ft.AlertDialog(
+    content = reg_panel,
+    actions = [],
+    open = False,
     bgcolor = "#151515"
 )
 
@@ -96,18 +154,13 @@ appbar_unlogged = ft.AppBar(
                         width = 1920,
                         )
         ],
-    toolbar_height = 80,
+    toolbar_height = 60,
     center_title = False,
     bgcolor = "#151515",
     shape = ft.OutlinedBorder,
     )
 
-dialog = ft.AlertDialog(
-    content = lgn_panel,
-    actions = [],
-    open = False,
-    bgcolor = "#151515"
-)
+
 
 
 main_column = ft.Column([
