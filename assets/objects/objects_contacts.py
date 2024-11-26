@@ -46,7 +46,7 @@ text_container = ft.Container(
             ),
 
             ft.Text(
-                "katyatelanchenko@gmail.com\n@gmail.com\n@gmail.com\n@gmail.com",
+                "katyatelanchenko@gmail.com\nmorph07112020@gmail.com\nowner@tanoshi.space\nhhungh07@gmail.com",
                 size = 12,
                 color = "#FFFFFF",
                 font_family = "Uni Neue Thin",
@@ -105,19 +105,19 @@ text_container = ft.Container(
                                 font_family = "Uni Neue Thin",
                             ),
                             ft.Text(
-                                "@user1",
+                                "roob1e",
                                 size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
                             ),
                             ft.Text(
-                                "@user2",
+                                "pacanchik",
                                 size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
                             ),
                             ft.Text(
-                                "@user3",
+                                "Zeefren",
                                 size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
@@ -138,19 +138,19 @@ text_container = ft.Container(
                                 font_family = "Uni Neue Thin",
                             ),
                             ft.Text(
-                                "@user4",
+                                "@_assxmblxr_",
                                 size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
                             ),
                             ft.Text(
-                                "@user5",
+                                "@tanoshi.space",
                                 size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
                             ),
                             ft.Text(
-                                "@user6",
+                                "@Zeefren_VV",
                                 size = 12,
                                 color = "#FFFFFF",
                                 font_family = "Uni Neue Thin",
