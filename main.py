@@ -45,23 +45,36 @@ def main(page: ft.Page):
                 objects_main.online.scale = 1.0
             page.update()
         
-        def open_dialog(e):
-            objects_main.dialog.open = True
+        def open_lgn(e):
+            objects_main.lgn_popup.open = True
+            page.update()
+            
+        def open_reg(e):
+            objects_main.reg_popup.open = True
             page.update()
         
-        def close_dialog(e):
-            objects_main.dialog.open = False
+        def redirect_to_reg(e):
+            objects_main.lgn_popup.open = False
+            objects_main.reg_popup.open = True
+            page.update()
+            
+        def redirect_to_lgn(e):
+            objects_main.reg_popup.open = False
+            objects_main.lgn_popup.open = True
             page.update()
         
         objects_main.liked.on_hover = on_hover_1
         objects_main.conf.on_hover = on_hover_2
         objects_main.online.on_hover = on_hover_3
         
-        objects_main.login.on_click = open_dialog
-        #objects_main.close.on_click = close_dialog
+        objects_main.login.on_click = open_lgn
+        objects_main.register.on_click = open_reg
         objects_main.contacts.on_click = contacts
         objects_main.home.on_click = main_page
         objects_main.rules.on_click = rules
+        
+        objects_main.lgn_redirect.on_click = redirect_to_reg
+        objects_main.reg_redirect.on_click = redirect_to_lgn
         
         categories_container = ft.Container(
             content = objects_main.categories_column,
@@ -94,7 +107,8 @@ def main(page: ft.Page):
             alignment = ft.alignment.top_center
         )
         
-        page.overlay.append(objects_main.dialog)
+        page.overlay.append(objects_main.lgn_popup)
+        page.overlay.append(objects_main.reg_popup)
         page.add(final_container)
         page.update()
     
@@ -115,7 +129,6 @@ def main(page: ft.Page):
         page.add(objects_rules.final)
         page.update()
         
-
     main_page()
 
 if __name__ == "__main__":
