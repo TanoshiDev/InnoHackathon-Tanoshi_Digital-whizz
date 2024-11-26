@@ -3,6 +3,7 @@ import flet as ft
 from assets.objects import objects_main
 from assets.objects import objects_contacts
 from assets.objects import objects_rules
+from assets.objects import objects_about_us
 
 from assets.actions import actions_main
 
@@ -62,6 +63,8 @@ def main(page: ft.Page):
         objects_main.contacts.on_click = contacts
         objects_main.home.on_click = main_page
         objects_main.rules.on_click = rules
+        objects_main.about.on_click = about_us
+        
         
         categories_container = ft.Container(
             content = objects_main.categories_column,
@@ -114,7 +117,22 @@ def main(page: ft.Page):
         
         page.add(objects_rules.final)
         page.update()
-        
+    
+    def about_us(*args):
+        page.clean()
+        page.title = "О нас"
+
+        objects_about_us.right_container_image_button.on_click = actions_main.open_telegram_link
+        def on_hover(event: ft.HoverEvent):
+            if event.data == "true":
+                objects_about_us.right_container_image_button.scale = 1.03
+            else: 
+                objects_about_us.right_container_image_button.scale = 1.0
+
+            page.update()
+        objects_about_us.right_container_image_button.on_hover = on_hover
+        page.add(objects_about_us.about_us)
+        page.update()
 
     main_page()
 
