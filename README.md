@@ -1,9 +1,7 @@
-# A testbuild Flet app
+# **Whizz**
 
-An example of a minimal Flet app.
+📄 **Документация**:
+- 🇷🇺 [README на русском языке](README_RU.md)
 
-To run the app:
-
-``` bash
-flet run [app_directory]
-```
+📄 **Docs**:
+- 🇺🇸 [README in English](README_EN.md)
