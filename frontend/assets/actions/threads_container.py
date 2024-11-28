@@ -3,29 +3,64 @@ from .threads_ import *
 from .tokens import *
 from .likes import *
 
+comment_field = ft.TextField(hint_text = "Введите комментарий...", multiline = True, width = 900, border_radius = 15, border_color = "#1C1C1C", focused_border_color = "#850000")
+
+callback_function = None
+callback_update = None
+callback_liked = None
+
+def set_callback_main(callback): 
+    global callback_function 
+    callback_function = callback
+    
+def set_callback_update(callback):
+    global callback_update
+    callback_update = callback
+    
+def set_callback_liked(callback):
+    global callback_liked
+    callback_liked = callback
+
+def call_main_function():
+    if callback_function:
+        callback_function()
+        
+def call_update_function():
+    if callback_update:
+        callback_update()
+        
+def call_liked_function():
+    if callback_liked:
+        callback_liked()
+    
 def send_comment(e: ft.TapEvent):
     post_id = getattr(e.control, "data")
+    page = e.page
     token = read_token()
+    print(type(page))
     text = comment_field.value
     print(post_id)
     response = create_comment(post_id, token, text)
     print(response)
     comment_field.value = ""
+    call_main_function()
+    
     
 def like(e):
     obj = e.control
     id = getattr(obj, "data")[0]
+
     token = read_token()
     page = getattr(obj, "data")[1]
     
     response = like_thread(id, token)
-    if response == 400:
-        alert = ft.AlertDialog(content = ft.Text("Вы уже лайкнули этот тред!"))
-        page.overlay.append(alert)
-        alert.open = True
-    page.update()
+    if response == True:
+        e.control.text = str(int(e.control.text) + 1)
+        call_update_function()
+    elif response == False:
+        call_liked_function()
 
-comment_field = ft.TextField(hint_text = "Введите комментарий...", multiline = True, width = 900, border_radius = 15, border_color = "#1C1C1C", focused_border_color = "#850000")
+
     
 def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: int, page: ft.Page) -> ft.Container:
     "Инициализирует объект треда с указанными параметрами и оформлением"
@@ -115,7 +150,7 @@ def get_comments(post_id: int) -> list[list | int]:
 
 def get_main_threads(page: ft.Page):
     threads_list = []
-    threads_list = read_themes(100, None)[1]
+    threads_list = read_themes(30, None)[1]
 
     final_list = []
 

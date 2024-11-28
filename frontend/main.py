@@ -14,6 +14,8 @@ from assets.actions import threads_container
 from assets.actions import likes
 from assets.actions.threads_ import create_theme
 
+
+
 page_theme = ft.Theme( 
     color_scheme=ft.ColorScheme( 
         primary = "#FFFFFF",
@@ -23,6 +25,15 @@ page_theme = ft.Theme(
 )
 
 def main(page: ft.Page):
+    def update_page():
+        page.update()
+    
+    def alert_liked():
+        alert = ft.AlertDialog(content = ft.Container(content = ft.Text("Вы уже лайкнули этот пост", size = 20), padding = ft.padding.all(10)), open = False)
+        page.overlay.append(alert)
+        alert.open = True
+        page.update()
+    
     def main_page(*args):
         page.clean()
         page.title = "Whizz"
@@ -34,7 +45,7 @@ def main(page: ft.Page):
         #page.adaptive = ft.Auto
         page.padding = None
         
-        if os.path.exists("frontend/assets/token.whz"):
+        if os.path.exists("frontend/assets/session.whz"):
             objects_main.profile_btn.content = ft.Text(tokens.read_login(), size = 20)
             page.appbar = objects_main.appbar_logged
         else:
@@ -45,6 +56,7 @@ def main(page: ft.Page):
         def on_hover_1(event: ft.HoverEvent):
             if event.data == "true":
                 objects_main.liked.scale = 1.03
+                page.window.on_event
             else: 
                 objects_main.liked.scale = 1.0
             page.update()
@@ -136,9 +148,7 @@ def main(page: ft.Page):
             page.update()
                           
         def write_post(*args):
-            with open("frontend/assets/token.whz", "r", encoding = "cp950") as f:
-                token = f.readline()
-            
+            token = tokens.read_token()
             title = objects_main.post_header_field.value
             topic = objects_main.theme_picker.value
             text = objects_main.post_text_field.value
@@ -231,6 +241,7 @@ def main(page: ft.Page):
         
     def about_us(*args):
         page.clean()
+        print(page.url)
         page.padding = None
         page.title = "О нас"
         objects_about_us.right_container_image_button.on_click = actions_main.open_telegram_link
@@ -457,7 +468,9 @@ def main(page: ft.Page):
         )
         page.add(help)
         page.update()
-
+    threads_container.set_callback_main(main_page)
+    threads_container.set_callback_update(update_page)
+    threads_container.set_callback_liked(alert_liked)
     main_page()
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
 def write_token(token: str):
-    with open("frontend/assets/token.whz", "w") as f:
+    with open("frontend/assets/session.whz", "w") as f:
         f.write(token)
         
 def read_token():
-    with open("frontend/assets/token.whz", "r") as f:
+    with open("frontend/assets/session.whz", "r") as f:
         return f.readline()
         
 def write_login(login: str):
