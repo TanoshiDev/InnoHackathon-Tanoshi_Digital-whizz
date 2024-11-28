@@ -35,3 +35,11 @@ def read_themes(limit: int | None, token: str | None):
     elif response.status_code == 400:
         return 400
     
+def read_comments(post_id):
+    response = requests.get(url = f"{url}/comments/{post_id}", params = {"post_id": post_id})
+    if response.json != []:
+        return [200, response.json()]
+    elif response.json() == []:
+        return [404, False]
+    else:
+        return [422]
