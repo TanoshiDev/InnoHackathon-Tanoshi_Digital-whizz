@@ -30,19 +30,19 @@ other = ft.TextButton("Другое")
 
 # Кнопки-картинки
 liked = ft.Container(
-    content = ft.Image("assets/liked.png"),
+    content = ft.Image("liked.png"),
     on_click = lambda e: None,
     animate_scale = ft.Animation(duration = 150, curve = ft.AnimationCurve.EASE_IN_OUT)
 )
 
 conf = ft.Container(
-    content = ft.Image("assets/conf.png"),
+    content = ft.Image("conf.png"),
     on_click = lambda e: None,
     animate_scale = ft.Animation(duration = 150, curve = ft.AnimationCurve.EASE_IN_OUT)
 )
 
 online = ft.Container(
-    content = ft.Image("assets/online.png"),
+    content = ft.Image("online.png"),
     on_click = lambda e: None,
     animate_scale = ft.Animation(duration = 150, curve = ft.AnimationCurve.EASE_IN_OUT)
 )
@@ -133,7 +133,7 @@ appbar_unlogged = ft.AppBar(
         actions=[
             ft.Container(ft.Row(
                             [
-                                ft.Container(ft.Image("assets/logo.png", scale = 1), margin = ft.margin.only(right = 75)),
+                                ft.Container(ft.Image("logo.png", scale = 1), margin = ft.margin.only(right = 75)),
                                 home,
                                 about,
                                 posts,
@@ -144,6 +144,40 @@ appbar_unlogged = ft.AppBar(
                                     content = ft.Row([
                                         login,
                                         register 
+                                    ], spacing = 60),
+                                    margin = ft.margin.only(left = 100)
+                                ),
+                                
+                            ],
+                            alignment = ft.MainAxisAlignment.START,
+                            spacing = 70,
+                        ),
+                        padding = ft.padding.only(left = 220, right = 20),
+                        width = 1920,
+                        )
+        ],
+    toolbar_height = 60,
+    center_title = False,
+    bgcolor = "#151515",
+    shape = ft.OutlinedBorder,
+    )
+
+profile_btn = ft.TextButton("username")
+
+appbar_logged = ft.AppBar(
+        actions=[
+            ft.Container(ft.Row(
+                            [
+                                ft.Container(ft.Image("logo.png", scale = 1), margin = ft.margin.only(right = 75)),
+                                home,
+                                about,
+                                posts,
+                                rules,
+                                contacts,
+                                help_,
+                                ft.Container(
+                                    content = ft.Row([
+                                        profile_btn
                                     ], spacing = 60),
                                     margin = ft.margin.only(left = 100)
                                 ),
@@ -210,7 +244,7 @@ post_popup = ft.AlertDialog(
 )
 
 main_column = ft.Column([
-    ft.Image(src = "assets/banner.png"),
+    ft.Image(src = "banner.png"),
     ft.Row([
         liked,
         conf,
