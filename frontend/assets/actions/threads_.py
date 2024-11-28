@@ -43,3 +43,22 @@ def read_comments(post_id):
         return [404, False]
     else:
         return [422]
+    
+def create_comment(post_id: int, token: str, text: str):
+    params = {
+        "post_id": post_id,
+        "token": token
+    }
+    
+    body = {
+        "text": text,
+        "parent_id": None
+    }
+    print(post_id, token, text)
+    response = requests.post(url = f"{url}/comments/{post_id}/", params = params, json = body)
+    if response.status_code == 200:
+        return 200
+    elif response.status_code == 422:
+        return 422
+    else:
+        return False

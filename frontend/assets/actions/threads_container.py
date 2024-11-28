@@ -3,6 +3,15 @@ from .threads_ import *
 from .tokens import *
 from .likes import *
 
+def send_comment(e: ft.TapEvent):
+    post_id = getattr(e.control, "data")
+    token = read_token()
+    text = comment_field.value
+    print(post_id)
+    response = create_comment(post_id, token, text)
+    print(response)
+    comment_field.value = ""
+    
 def like(e):
     obj = e.control
     id = getattr(obj, "data")[0]
@@ -15,10 +24,21 @@ def like(e):
         page.overlay.append(alert)
         alert.open = True
     page.update()
-    
+
+comment_field = ft.TextField(hint_text = "Введите комментарий...", multiline = True, width = 900, border_radius = 15, border_color = "#1C1C1C", focused_border_color = "#850000")
     
 def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: int, page: ft.Page) -> ft.Container:
     "Инициализирует объект треда с указанными параметрами и оформлением"
+    result = get_comments(id)
+    result[0].append(
+        ft.Container(
+            content = ft.Row([
+                comment_field,
+                ft.TextButton(text = "Отправить", icon = ft.icons.SEND, style = ft.ButtonStyle(bgcolor = "#850000"), width = 200, on_click = send_comment, data = id)
+            ])
+        )
+    )
+    comments = ft.Container(content = ft.Column(result[0], spacing = 20))
     
     panel = ft.ExpansionPanelList(
         expand_icon_color = "#850000",
@@ -26,10 +46,10 @@ def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: in
         divider_color = "#850000",
         controls=[
             ft.ExpansionPanel(
-                header = ft.Text("Комментарии", size = 20, color = "#850000"),
+                header = ft.Container(content = ft.Text(f"Комментарии ({result[1]})", size = 20, color = "#850000"), padding = ft.padding.all(20)),
                 bgcolor = "#151515",
                 expanded = False,
-                content = get_comments(id),
+                content = comments,
                 left = 5,
                 right = 5,
                 top = 5,
@@ -69,16 +89,17 @@ def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: in
 
 def init_comment(user_id: int, text: str):
     return ft.Container(
-        content = ft.Row([
+        content = ft.Column([
             ft.Text(user_id, size = 20, color = "#850000"),
             ft.Text(text, size = 18)
         ]),
         bgcolor = "#1C1C1C",
         border_radius = 15,
-        padding = ft.padding.all(10)
+        padding = ft.padding.all(10),
+        width = 1200
     )
     
-def get_comments(post_id: int):
+def get_comments(post_id: int) -> list[list | int]:
     final_list = []
     response = read_comments(post_id)
     
@@ -89,7 +110,8 @@ def get_comments(post_id: int):
             res = init_comment(comment["user_id"], comment["text"])
             final_list.append(res)
             
-        return ft.Column(final_list, spacing = 20)
+        return [final_list, len(final_list)]
+    return [(ft.Container()), 0]
 
 def get_main_threads(page: ft.Page):
     threads_list = []
