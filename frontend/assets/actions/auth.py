@@ -1,7 +1,7 @@
 import requests
 import assets.actions.tokens as tokens
 
-url = "https://api.whizz.guru/"
+url = "http://api.whizz.guru/"
 
 def register(login: str, password: str):
     json = {

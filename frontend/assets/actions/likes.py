@@ -1,6 +1,6 @@
 import requests
 
-url = "https://api.whizz.guru"
+url = "http://api.whizz.guru"
 
 def like_thread(id: int, token: str):
     params = {

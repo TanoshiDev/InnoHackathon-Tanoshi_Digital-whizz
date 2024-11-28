@@ -5,6 +5,7 @@ from assets.objects import objects_main
 from assets.objects import objects_contacts
 from assets.objects import objects_rules
 from assets.objects import objects_about_us
+from assets.objects import objects_help
 
 from assets.actions import actions_main
 from assets.actions import auth
@@ -162,6 +163,7 @@ def main(page: ft.Page):
         objects_main.home.on_click = main_page
         objects_main.rules.on_click = rules
         objects_main.about.on_click = about_us
+        objects_main.help_.on_click = help
         objects_main.posts.on_click = open_writer
         
         objects_main.lgn_redirect.on_click = redirect_to_reg
@@ -244,7 +246,51 @@ def main(page: ft.Page):
         objects_about_us.right_container_image_button.on_hover = on_hover
         page.add(objects_about_us.about_us)
         page.update()
+
+    def help(*args):
+        page.clean
+        page.padding = ft.padding.only(right = 100, left = 100, top = 80)
+
+        def on_hover(event):
+            if event.data == "true":
+                event.control.scale = 1.03
+            else:
+                event.control.scale = 1.0 
+            page.update()
         
+        def create_panel(index, title, content):
+            return ft.ExpansionPanel(
+                header = ft.Container(
+                    content = ft.Text(title, size = 16, color = "white"),
+                    padding = ft.padding.symmetric(horizontal = 15, vertical = 10),
+                    bgcolor = "#151515",
+                    border = ft.border.all(0, "transparent"),
+                    border_radius = 15,
+                ),
+                content = ft.Container(
+                    content = ft.Column(
+                        [
+                            ft.Divider(height = 1, color = "#850000"),
+                            ft.Text(content, size = 16, color = "white"),
+                        ],
+                        spacing = 35,
+                    ),
+                    padding = ft.padding.all(10),
+                    bgcolor = "#151515",
+                    border_radius = 15,
+                ), bgcolor = "#151515",
+            )
+
+        left_column_panels = [create_panel(i, *objects_help.panel_data[i]) for i in range(len(objects_help.panel_data) // 2)]
+        right_column_panels = [create_panel(i, *objects_help.panel_data[i]) for i in range(len(objects_help.panel_data) // 2, len(objects_help.panel_data))]
+
+
+        objects_help.submit_button.on_hover = on_hover
+        objects_help.left_column.controls = left_column_panels
+        objects_help.right_column.controls = right_column_panels
+        page.add(help)
+        page.update()
+
     main_page()
 
 if __name__ == "__main__":
