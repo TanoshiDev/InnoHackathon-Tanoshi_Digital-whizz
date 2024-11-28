@@ -43,7 +43,6 @@ def get_main_threads(page: ft.Page):
 
     for thread in threads_list:
         res = init_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], page)
-        res.on_click = popup_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], page)
         final_list.append(res)
         
     return ft.Column(final_list, scroll = ft.ScrollMode.AUTO)
