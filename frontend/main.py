@@ -256,6 +256,8 @@ def main(page: ft.Page):
             else:
                 event.control.scale = 1.0 
             page.update()
+                    
+        objects_help.submit_button.on_hover = on_hover
         
         def create_panel(index, title, content):
             return ft.ExpansionPanel(
@@ -283,10 +285,8 @@ def main(page: ft.Page):
         left_column_panels = [create_panel(i, *objects_help.panel_data[i]) for i in range(len(objects_help.panel_data) // 2)]
         right_column_panels = [create_panel(i, *objects_help.panel_data[i]) for i in range(len(objects_help.panel_data) // 2, len(objects_help.panel_data))]
 
-
-        objects_help.submit_button.on_hover = on_hover
         objects_help.left_column.controls = left_column_panels
-        objects_help.right_column.controls = right_column_panels
+        objects_help.right_column.controls = right_column_panels  
         page.add(help)
         page.update()
 
