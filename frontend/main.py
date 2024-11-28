@@ -34,7 +34,7 @@ def main(page: ft.Page):
         page.padding = None
         
         if os.path.exists("frontend/assets/token.whz"):
-            objects_main.profile_btn.text = tokens.read_login()
+            objects_main.profile_btn.content = ft.Text(tokens.read_login(), size = 20)
             page.appbar = objects_main.appbar_logged
         else:
             page.appbar = objects_main.appbar_unlogged
@@ -95,11 +95,11 @@ def main(page: ft.Page):
             response = auth.login(login, password)
             
             if response == 200:
+                tokens.write_login(objects_main.lgn_login_field.value) 
                 objects_main.lgn_login_field.value = ""
                 objects_main.lgn_pass_field.value = ""
                 page.appbar = objects_main.appbar_logged
                 objects_main.profile_btn.text = tokens.read_login()
-                
                 alert = ft.AlertDialog(content = ft.Text("Вы успешно вошли в учётную запись", size = 20, width = 360), open = False, bgcolor = "#1C1C1C")   
             elif response == 400:
                 objects_main.lgn_login_field.value = ""
@@ -141,8 +141,8 @@ def main(page: ft.Page):
             title = objects_main.post_header_field.value
             topic = objects_main.theme_picker.value
             text = objects_main.post_text_field.value
-            print(token, title, topic, text)
             response = create_theme(token, topic, title, text)
+            print(response)
             
             if response[0] == 200:
                 alert = ft.AlertDialog(content = ft.Container(content = ft.Text("Ваша тема была опубликована", size = 20, width = 360, text_align = ft.TextAlign.CENTER, height = 25), alignment = ft.alignment.center, height = 30), open = False, bgcolor = "#1C1C1C")
@@ -192,7 +192,6 @@ def main(page: ft.Page):
             height = 850,
             padding = ft.padding.only(top = 5)
         )
-        
         final_container = ft.Container(
             content = ft.Row(
                 [

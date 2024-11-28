@@ -162,7 +162,7 @@ appbar_unlogged = ft.AppBar(
     shape = ft.OutlinedBorder,
     )
 
-profile_btn = ft.TextButton("username")
+profile_btn = ft.CupertinoButton(content = ft.Text("username", size = 20), bgcolor = "#850000", color = "#ffffff", border_radius = 15, height = 50)
 
 appbar_logged = ft.AppBar(
         actions=[
@@ -269,4 +269,21 @@ categories_column = ft.Container(
         social,
         other,
     ])  
-)                       
+)    
+
+username = ft.Text(value = "", size = 20)
+change_av = ft.TextButton(text = "Сменить фотографию", scale = 1.2)
+
+profile_panel = ft.Container(
+    content = ft.Row([
+        ft.Column([
+            ft.Image(width = 200)
+        ]),
+        ft.Column([
+            username,
+            change_av
+        ])
+    ])
+)
+
+#profile_popup                   

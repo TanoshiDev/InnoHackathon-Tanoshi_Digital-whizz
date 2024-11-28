@@ -1,6 +1,6 @@
 import requests
 
-url = "https://api.whizz.guru/"
+url = "http://api.whizz.guru/"
 
 def create_theme(token: str, topic: str, title: str, text: str):
     params = {

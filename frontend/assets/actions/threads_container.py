@@ -19,6 +19,8 @@ def like(e):
     
 def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: int, page: ft.Page) -> ft.Container:
     "Инициализирует объект треда с указанными параметрами и оформлением"
+    date = date.replace("-", ".")
+    date = date.replace("T", " | ")
     return ft.Container(
         content = ft.Column([
             ft.Row([
@@ -37,7 +39,7 @@ def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: in
 
 def get_main_threads(page: ft.Page):
     threads_list = []
-    threads_list = read_themes(100, None)[1]
+    threads_list = read_themes(10, None)[1]
 
     final_list = []
 
