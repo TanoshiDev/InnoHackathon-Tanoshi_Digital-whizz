@@ -133,7 +133,7 @@ left_column = ft.Container(
     height = 500),
     width = 800,
     padding = ft.padding.only(right = 20),
-    height = 500
+    height = 500,
 )
 
 right_column = ft.Container(

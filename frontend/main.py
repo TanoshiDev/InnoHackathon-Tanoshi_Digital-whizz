@@ -188,11 +188,12 @@ def main(page: ft.Page):
                 [
                     objects_main.main_column,
                     threads_container.get_main_threads(page)
-                ], scroll = ft.ScrollMode.AUTO   
+                ], scroll = ft.ScrollMode.ADAPTIVE,
+                spacing = 50  
             ),
             margin = ft.margin.only(right = 50),
-            height = 850,
-            padding = ft.padding.only(top = 5)
+            height = 930,
+            padding = ft.padding.only(top = 30)
         )
         final_container = ft.Container(
             content = ft.Row(
@@ -202,8 +203,7 @@ def main(page: ft.Page):
                 ]
             ),
             padding = ft.padding.only(left = 100),
-            margin = ft.margin.only,
-            alignment = ft.alignment.top_center
+            #alignment = ft.alignment.top_center
         )
         
         page.overlay.append(objects_main.lgn_popup)
