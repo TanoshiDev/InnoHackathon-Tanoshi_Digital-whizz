@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from pydantic import BaseModel
 
@@ -6,25 +6,47 @@ from pydantic import BaseModel
 class UserBase(BaseModel):
     login: str
 
-class UserCreate(BaseModel):
-    login: str
+
+class UserCreate(UserBase):
     password: str
 
-class User(UserBase):
+
+class User(BaseModel):
     ID: int
-    token: str
+    login: str
     avatar: Optional[str] = None
 
     class Config:
         from_attributes = True
+
+
+class UserInfo(BaseModel):
+    ID: int
+    login: str
+    avatar: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    login: Optional[str] = None
+
 
 class PostBase(BaseModel):
     topic: str
     title: str
     text: str
 
+
 class PostCreate(PostBase):
     pass
+
 
 class Post(PostBase):
     ID: int
@@ -36,12 +58,15 @@ class Post(PostBase):
     class Config:
         from_attributes = True
 
+
 class CommentBase(BaseModel):
     text: str
     parent_id: Optional[int] = None
 
+
 class CommentCreate(CommentBase):
     pass
+
 
 class Comment(CommentBase):
     ID: int
@@ -51,3 +76,8 @@ class Comment(CommentBase):
 
     class Config:
         from_attributes = True
+
+
+class Feedback(BaseModel):
+    title: str
+    description: str
