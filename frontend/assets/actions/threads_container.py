@@ -2,6 +2,7 @@ import flet as ft
 from .threads_ import *
 from .tokens import *
 from .likes import *
+from .auth import user_info
 
 comment_field = ft.TextField(hint_text = "Введите комментарий...", multiline = True, width = 900, border_radius = 15, border_color = "#1C1C1C", focused_border_color = "#850000")
 
@@ -56,10 +57,8 @@ def like(e):
         call_update_function()
     elif response == False:
         call_liked_function()
-
-
-    
-def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: int, page: ft.Page) -> ft.Container:
+   
+def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: int, author_id: int, page: ft.Page) -> ft.Container:
     "Инициализирует объект треда с указанными параметрами и оформлением"
     result = get_comments(id)
     result[0].append(
@@ -92,7 +91,7 @@ def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: in
         content = ft.Column([
             ft.Column([
                 ft.Row([
-                    ft.Text("Здесь будет имя автора...", size = 20, color = "#850000"),
+                    ft.Text(f"{user_info(author_id)["login"]}", size = 20, color = "#850000"),
                     ft.Text(date, size = 18)
                 ], alignment = ft.MainAxisAlignment.SPACE_BETWEEN),
                 ft.Text(f"{topic}. {title}", size = 24),
@@ -150,7 +149,7 @@ def get_main_threads(page: ft.Page):
 
         final_list = []
         for thread in threads_list:
-            res = init_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], page)
+            res = init_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], thread["author_id"], page)
             final_list.append(res)
             
         return ft.Column(final_list, scroll = ft.ScrollMode.AUTO)

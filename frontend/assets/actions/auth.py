@@ -39,4 +39,19 @@ def login(login: str, password: str):
     else:
         print(response.json())
         return 422
+
+def user_info(user_id: int):
+    token = tokens.read_token()
     
+    headers = {
+        "Authorization": f"Bearer {token}"
+    }   
+    
+    params = {
+        "user_id": user_id
+    }
+    
+    response = requests.get(url = f"{url}/users/{user_id}", params = params, headers = headers)
+    
+    if response.status_code == 200:
+        return response.json()
