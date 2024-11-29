@@ -273,7 +273,7 @@ categories_column = ft.Container(
 
 username = ft.Text(value = "", size = 20)
 change_av = ft.TextButton(text = "Сменить фотографию", scale = 1.2)
-av = ft.Image(width = 100, height = 100, border_radius = 100, color = "#850000", fit = ft.ImageFit.FIT_WIDTH)
+av = ft.Image(width = 100, height = 100, border_radius = 100, color = "#850000", fit = ft.ImageFit.FIT_WIDTH, src = "frontend/assets/default.jpg")
 
 profile_panel = ft.Container(
     content = ft.Row([
