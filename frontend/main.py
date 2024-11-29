@@ -13,6 +13,7 @@ from assets.actions import tokens
 from assets.actions import threads_container
 from assets.actions import likes
 from assets.actions.threads_ import create_theme
+from assets.actions.help import send_feedback
 
 page_theme = ft.Theme( 
     color_scheme=ft.ColorScheme( 
@@ -45,7 +46,7 @@ def main(page: ft.Page):
         
         page.overlay.append(objects_main.lgn_popup)
         page.overlay.append(objects_main.reg_popup)
-        if os.path.exists("frontend/assets/session.whz"):
+        if os.path.exists("assets/session.whz"):
             objects_main.profile_btn.content = ft.Text(tokens.read_login(), size = 20)
             page.appbar = objects_main.appbar_logged
             page.overlay.append(objects_main.post_popup)
@@ -285,8 +286,26 @@ def main(page: ft.Page):
                 event.control.scale = 1.0 
             page.update()
         
+        def send_report(*args):
+            title = objects_help.title_input.value
+            description = objects_help.description_input.value
+            
+            response = send_feedback(title, description)
+            
+            objects_help.description_input.value = ""
+            objects_help.title_input.value = ""
+            
+            if response == 200:
+                alert = ft.AlertDialog(content = ft.Text("Отчёт отправлен!"), open = False)
+                page.overlay.append(alert)
+                alert.open = True
+                page.update()
+            
+            
+        
         objects_help.submit_button.on_hover = on_hover
-
+        objects_help.submit_button.on_click = send_report
+        
         def create_panel(index, title, content):
             return ft.ExpansionPanel(
                 header = ft.Container(
