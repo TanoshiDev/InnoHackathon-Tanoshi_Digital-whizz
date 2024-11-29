@@ -27,7 +27,7 @@ text_with_image_background = ft.Container(
 
 left_container = ft.Container(
     content = ft.Image(
-            src="frontend/assets/image_about_us.png",
+            src="image_about_us.png",
             width = 460,
             height = 340,
             fit = ft.ImageFit.CONTAIN,

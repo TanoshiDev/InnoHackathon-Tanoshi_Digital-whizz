@@ -43,10 +43,11 @@ def main(page: ft.Page):
         page.scroll = ft.ScrollMode.AUTO
         #page.adaptive = ft.Auto
         page.padding = None
-        
+        current_dir = os.path.dirname(__file__)
+        path = os.path.join(current_dir, "assets", "session.whz")
         page.overlay.append(objects_main.lgn_popup)
         page.overlay.append(objects_main.reg_popup)
-        if os.path.exists("assets/session.whz"):
+        if os.path.exists(path):
             objects_main.profile_btn.content = ft.Text(tokens.read_login(), size = 20)
             page.appbar = objects_main.appbar_logged
             page.overlay.append(objects_main.post_popup)
