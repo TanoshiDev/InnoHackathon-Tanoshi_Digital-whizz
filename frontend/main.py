@@ -151,10 +151,11 @@ def main(page: ft.Page):
             text = objects_main.post_text_field.value
             response = create_theme(topic, title, text)
             print(response)
+            print(topic, title, text)
             
             if response[0] == 200:
                 alert = ft.AlertDialog(content = ft.Container(content = ft.Text("Ваша тема была опубликована", size = 20, width = 360, text_align = ft.TextAlign.CENTER, height = 25), alignment = ft.alignment.center, height = 30), open = False, bgcolor = "#1C1C1C")
-            elif response[0] == 422:
+            else:
                 alert = ft.AlertDialog(content = ft.Text("Ошибка публикации!", size = 20, width = 360), open = False, bgcolor = "#1C1C1C")
             page.overlay.append(alert)
             alert.open = True
@@ -238,7 +239,6 @@ def main(page: ft.Page):
         
     def about_us(*args):
         page.clean()
-        print(page.url)
         page.padding = None
         page.title = "О нас"
         objects_about_us.right_container_image_button.on_click = actions_main.open_telegram_link

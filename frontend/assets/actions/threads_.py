@@ -21,7 +21,7 @@ def create_theme(topic: str, title: str, text: str):
     response = requests.post(url = f"{url}/themes/", json = data, headers = headers)
     
     if response.status_code == 200:
-        print(response.json())
+        print(response)
         return [200, response.json()]
     elif response.status_code == 422:
         return [422, None]
@@ -83,13 +83,9 @@ def create_comment(post_id: int, token: str, text: str):
     print(post_id, token, text)
     response = requests.post(url = f"{url}/comments/{post_id}/", params = params, json = body, headers = headers)
     if response.status_code == 200:
-        print(response.json())
         return 200
     elif response.status_code == 422:
-        print(response.json())
         return 422
     else:
         print(response.json())
         return False
-    
-print(read_themes(1))

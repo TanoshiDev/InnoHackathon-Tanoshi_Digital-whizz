@@ -81,11 +81,7 @@ def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: in
                 header = ft.Container(content = ft.Text(f"Комментарии ({result[1]})", size = 20, color = "#850000"), padding = ft.padding.all(20)),
                 bgcolor = "#151515",
                 expanded = False,
-                content = comments,
-                left = 5,
-                right = 5,
-                top = 5,
-                bottom = 5
+                content = comments
             )
         ]
     )
@@ -148,13 +144,11 @@ def get_comments(post_id: int) -> list[list | int]:
 def get_main_threads(page: ft.Page):
     threads_list = []
     response = read_themes(30)
-    print(response)
     
     if response[0] == 200:
         threads_list = read_themes(30)[1]
 
         final_list = []
-        print(threads_list)
         for thread in threads_list:
             res = init_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], page)
             final_list.append(res)
