@@ -97,7 +97,7 @@ def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: in
         content = ft.Column([
             ft.Column([
                 ft.Row([
-                    ft.Text(f"{user_info(author_id)["login"]}", size = 20, color = "#850000"),
+                    ft.Text(f"{user_info(author_id)['login']}", size = 20, color = "#850000"),
                     ft.Text(date, size = 18)
                 ], alignment = ft.MainAxisAlignment.SPACE_BETWEEN),
                 ft.Text(f"{topic}. {title}", size = 24),
