@@ -26,21 +26,18 @@ text_with_image_background = ft.Container(
 )
 
 left_container = ft.Container(
-        content = ft.Video(
-            expand = True,
-            playlist = ["frontend/assets/promo.mp4"],
-            playlist_mode = ft.PlaylistMode.LOOP,
-            aspect_ratio = 16 / 9,
-            volume = 0,
-            autoplay = True,
-            filter_quality = ft.FilterQuality.HIGH,
-            muted = True,
-        ),
-        bgcolor = "#151515",
-        border_radius = 25,
-        width = 1100,
-        height = 600,
-    )
+    content = ft.Image(
+            src="frontend/assets/image_about_us.png",
+            width = 460,
+            height = 340,
+            fit = ft.ImageFit.CONTAIN,
+    ),
+    bgcolor="#151515",
+    border_radius=25,
+    width=940,
+    height=530,
+)
+
 
 right_container_text = ft.Text(
     "Социальные сети",

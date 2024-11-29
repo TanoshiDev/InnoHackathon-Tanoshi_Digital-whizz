@@ -273,8 +273,6 @@ def main(page: ft.Page):
         page.add(objects_about_us.about_us)
         page.update()
 
-
-
     def help(*args):
         page.clean()
         page.title = "Помощь"
