@@ -14,8 +14,6 @@ from assets.actions import threads_container
 from assets.actions import likes
 from assets.actions.threads_ import create_theme
 
-
-
 page_theme = ft.Theme( 
     color_scheme=ft.ColorScheme( 
         primary = "#FFFFFF",
@@ -148,11 +146,10 @@ def main(page: ft.Page):
             page.update()
                           
         def write_post(*args):
-            token = tokens.read_token()
             title = objects_main.post_header_field.value
             topic = objects_main.theme_picker.value
             text = objects_main.post_text_field.value
-            response = create_theme(token, topic, title, text)
+            response = create_theme(topic, title, text)
             print(response)
             
             if response[0] == 200:

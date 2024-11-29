@@ -1,7 +1,7 @@
 import requests
 import assets.actions.tokens as tokens
 
-url = "http://api.whizz.guru/"
+url = "https://api.whizz.guru/"
 
 def register(login: str, password: str):
     json = {
@@ -22,16 +22,21 @@ def register(login: str, password: str):
     
 def login(login: str, password: str):
     json = {
-        "login": login,
-        "password": password
+        "username": login,
+        "password": password,
+        "grant_type": "password",
     }
     
-    response = requests.post(url = f"{url}/auth/login", json = json)
+    response = requests.post(url = f"{url}/auth/login", data = json)
     
     if response.status_code == 200:
-        tokens.write_token(response.json()["token"])
+        tokens.write_token(response.json()["access_token"])
+        print(response.json())
         return 200
+        
     elif response.status_code == 400:
         return 400
     else:
+        print(response.json())
         return 422
+    

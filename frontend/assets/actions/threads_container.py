@@ -49,11 +49,8 @@ def send_comment(e: ft.TapEvent):
 def like(e):
     obj = e.control
     id = getattr(obj, "data")[0]
-
-    token = read_token()
-    page = getattr(obj, "data")[1]
     
-    response = like_thread(id, token)
+    response = like_thread(id)
     if response == True:
         e.control.text = str(int(e.control.text) + 1)
         call_update_function()
@@ -150,12 +147,18 @@ def get_comments(post_id: int) -> list[list | int]:
 
 def get_main_threads(page: ft.Page):
     threads_list = []
-    threads_list = read_themes(30, None)[1]
+    response = read_themes(30)
+    print(response)
+    
+    if response[0] == 200:
+        threads_list = read_themes(30)[1]
 
-    final_list = []
-
-    for thread in threads_list:
-        res = init_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], page)
-        final_list.append(res)
-        
-    return ft.Column(final_list, scroll = ft.ScrollMode.AUTO)
+        final_list = []
+        print(threads_list)
+        for thread in threads_list:
+            res = init_thread(thread["title"], thread["topic"], thread["text"], thread["likes"], thread["date"], thread["ID"], page)
+            final_list.append(res)
+            
+        return ft.Column(final_list, scroll = ft.ScrollMode.AUTO)
+    else:
+        return ft.Column([ft.Text("Вы не авторизовались")])
