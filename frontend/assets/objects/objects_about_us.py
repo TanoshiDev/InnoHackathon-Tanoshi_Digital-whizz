@@ -26,11 +26,21 @@ text_with_image_background = ft.Container(
 )
 
 left_container = ft.Container(
-    bgcolor = "#151515",
-    border_radius = 25,
-    width = 1100,
-    height = 600,
-)
+        content = ft.Video(
+            expand = True,
+            playlist = [".video.mp4"],
+            playlist_mode = ft.PlaylistMode.LOOP,
+            aspect_ratio = 16 / 9,
+            volume = 0,
+            autoplay = True,
+            filter_quality = ft.FilterQuality.HIGH,
+            muted = True,
+        ),
+        bgcolor = "#151515",
+        border_radius = 25,
+        width = 1100,
+        height = 600,
+    )
 
 right_container_text = ft.Text(
     "Социальные сети",

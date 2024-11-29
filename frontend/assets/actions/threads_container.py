@@ -3,6 +3,7 @@ from .threads_ import *
 from .tokens import *
 from .likes import *
 from .auth import user_info
+from datetime import datetime, timedelta
 
 comment_field = ft.TextField(hint_text = "Введите комментарий...", multiline = True, width = 900, border_radius = 15, border_color = "#1C1C1C", focused_border_color = "#850000")
 
@@ -59,6 +60,11 @@ def like(e):
         call_liked_function()
    
 def init_thread(title: str, topic: str, text: str, likes: str, date: str, id: int, author_id: int, page: ft.Page) -> ft.Container:
+    time = date[date.find("T") + 1:]
+    time_obj = datetime.strptime(time, "%H:%M:%S")
+    time_obj = time_obj + timedelta(hours = 3)
+    time = time_obj.time().strftime("%H:%M:%S")
+    date = date[:date.find("T")] + " " + time
     "Инициализирует объект треда с указанными параметрами и оформлением"
     result = get_comments(id)
     result[0].append(
@@ -129,12 +135,10 @@ def init_comment(user_id: int, text: str):
 def get_comments(post_id: int) -> list[list | int]:
     final_list = []
     response = read_comments(post_id)
-    
     if response[0] == 200:
         comments_list = response[1]
-        
         for comment in comments_list:
-            res = init_comment(comment["user_id"], comment["text"])
+            res = init_comment(user_info(comment["user_id"])["login"], comment["text"])
             final_list.append(res)
             
         return [final_list, len(final_list)]

@@ -273,17 +273,24 @@ categories_column = ft.Container(
 
 username = ft.Text(value = "", size = 20)
 change_av = ft.TextButton(text = "Сменить фотографию", scale = 1.2)
+av = ft.Image(width = 100, height = 100, border_radius = 100, color = "#850000", fit = ft.ImageFit.FIT_WIDTH)
 
 profile_panel = ft.Container(
     content = ft.Row([
         ft.Column([
-            ft.Image(width = 200)
+            av
         ]),
         ft.Column([
             username,
             change_av
         ])
-    ])
+    ]),
+    height = 250
 )
 
-#profile_popup                   
+profile_popup = ft.AlertDialog(
+    content = profile_panel,
+    open = False,
+    actions = [],
+    bgcolor = "#151515"
+)                   

@@ -163,6 +163,12 @@ def main(page: ft.Page):
             alert.open = True
             page.update()
         
+        def open_profile_popup(*args):
+            objects_main.username.value = tokens.read_login()
+            page.overlay.append(objects_main.profile_popup)
+            objects_main.profile_popup.open = True
+            page.update()
+        
         objects_main.liked.on_hover = on_hover_1
         objects_main.conf.on_hover = on_hover_2
         objects_main.online.on_hover = on_hover_3
@@ -183,6 +189,7 @@ def main(page: ft.Page):
         objects_main.login_btn.on_click = login
         objects_main.reg_btn.on_click = register
         objects_main.send_post.on_click = write_post
+        objects_main.profile_btn.on_click = open_profile_popup
         
         categories_container = ft.Container(
             content = objects_main.categories_column,
