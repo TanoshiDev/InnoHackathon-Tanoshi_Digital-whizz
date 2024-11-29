@@ -257,7 +257,7 @@ def main(page: ft.Page):
                 objects_about_us.right_container_image_button.scale = 1.03
             else:
                 objects_about_us.right_container_image_button.scale = 1.0
-            page.update
+            page.update()
             
         objects_about_us.right_container_image_button.on_hover = on_hover
         page.add(objects_about_us.about_us)
@@ -269,6 +269,15 @@ def main(page: ft.Page):
         page.clean()
         page.title = "Помощь"
         page.padding = ft.padding.only(right = 100, left = 100, top = 80)
+
+        def on_hover(event):
+            if event.data == "true":
+                event.control.scale = 1.03
+            else:
+                event.control.scale = 1.0 
+            page.update()
+        
+        objects_help.submit_button.on_hover = on_hover
 
         def create_panel(index, title, content):
             return ft.ExpansionPanel(
@@ -296,8 +305,12 @@ def main(page: ft.Page):
         left_column_panels = [create_panel(i, *objects_help.panel_data[i]) for i in range(len(objects_help.panel_data) // 2)]
         right_column_panels = [create_panel(i, *objects_help.panel_data[i]) for i in range(len(objects_help.panel_data) // 2, len(objects_help.panel_data))]
 
-        objects_help.left_column.controls = left_column_panels
-        objects_help.right_column.controls = right_column_panels
+        objects_help.left_column.content = ft.Column([ft.ExpansionPanelList(
+        expand_icon_color = "white",
+        controls = left_column_panels,),],)
+        objects_help.right_column.content = ft.Column([ft.ExpansionPanelList(
+        expand_icon_color = "white",
+        controls = right_column_panels)])
 
         page.add(objects_help.help)
         page.update()
