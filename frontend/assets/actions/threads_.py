@@ -3,7 +3,7 @@ import assets.actions.tokens
 
 
 
-url = "http://api.whizz.guru/"
+url = "https://api.whizz.guru/"
 
 def create_theme(topic: str, title: str, text: str):
     token = assets.actions.tokens.read_token()
@@ -21,12 +21,9 @@ def create_theme(topic: str, title: str, text: str):
     response = requests.post(url = f"{url}/themes/", json = data, headers = headers)
     
     if response.status_code == 200:
-        print(response)
         return [200, response.json()]
     elif response.status_code == 422:
         return [422, None]
-    else:
-        print(response.json())
     
 def read_themes(limit: int | None):
     token = assets.actions.tokens.read_token()

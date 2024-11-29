@@ -149,9 +149,11 @@ def main(page: ft.Page):
             title = objects_main.post_header_field.value
             topic = objects_main.theme_picker.value
             text = objects_main.post_text_field.value
-            response = create_theme(topic, title, text)
-            print(response)
+            
             print(topic, title, text)
+            
+            response = create_theme(topic, title, text)
+            print(f"--------------{response}")
             
             if response[0] == 200:
                 alert = ft.AlertDialog(content = ft.Container(content = ft.Text("Ваша тема была опубликована", size = 20, width = 360, text_align = ft.TextAlign.CENTER, height = 25), alignment = ft.alignment.center, height = 30), open = False, bgcolor = "#1C1C1C")
